@@ -59,7 +59,7 @@ export default function LoginPage() {
                         {loading ? "Ingresando…" : "Ingresar"}
                     </button>
                 </form>
-                <p className="text-muted small mt-3 mb-0">
+                <div className="text-muted small mt-3 mb-0">
                     Demo: 
                     <ul>
                         <li>admin / 1234</li>
@@ -67,7 +67,7 @@ export default function LoginPage() {
                         <li>juan / juan123</li>
                         <li>cristian / pass2025</li>
                     </ul>
-                </p>
+                </div>
             </div>
         </div>
     );
