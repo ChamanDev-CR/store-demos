@@ -12,7 +12,7 @@ export default function CartPage() {
     const { user, logout } = useAuth();
 
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
-    const shipping = cart.length > 0 ? 2500 : 0;
+    const shipping = cart.length > 0 ? 5 : 0;
     const total = subtotal + shipping;
 
     return (
@@ -44,9 +44,9 @@ export default function CartPage() {
                                     <p className="text-gray-500 text-xs">Marca: Genérica</p>
                                 </td>
                                 <td className="p-2 text-center">En stock</td>
-                                <td className="p-2 text-center">₡ {item.price.toLocaleString()}</td>
+                                <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
                                 <td className="p-2 text-center">1</td>
-                                <td className="p-2 text-center">₡ {item.price.toLocaleString()}</td>
+                                <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
                             </tr>
                         ))}
 
@@ -74,15 +74,15 @@ export default function CartPage() {
 
                         <tr className="border-t">
                             <td colSpan={5} className="p-2 text-right font-semibold">Total productos</td>
-                            <td className="p-2 text-right">₡ {subtotal.toLocaleString()}</td>
+                            <td className="p-2 text-right">$ {subtotal.toLocaleString()}</td>
                         </tr>
                         <tr>
                             <td colSpan={5} className="p-2 text-right font-semibold">Envío total</td>
-                            <td className="p-2 text-right">₡ {shipping.toLocaleString()}</td>
+                            <td className="p-2 text-right">$ {shipping.toLocaleString()}</td>
                         </tr>
                         <tr className="border-t text-lg font-bold">
                             <td colSpan={5} className="p-2 text-right">TOTAL</td>
-                            <td className="p-2 text-right text-green-600">₡ {total.toLocaleString()}</td>
+                            <td className="p-2 text-right text-green-600">$ {total.toLocaleString()}</td>
                         </tr>
                     </tbody>
                 </table>
