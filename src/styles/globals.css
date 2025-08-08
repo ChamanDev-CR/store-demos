@@ -109,3 +109,10 @@ a {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+.btn-logout {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #fff;
+}

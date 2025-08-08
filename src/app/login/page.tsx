@@ -1,19 +1,31 @@
 "use client";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 export default function LoginPage() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const { login } = useAuth();
+    const { cart } = useCart();
     const router = useRouter();
 
-    const handleLogin = () => {
-        if (login(username, password)) {
-            router.push("/");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const onSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        const ok = await login(username, password);
+        setLoading(false);
+        if (ok) {
+            // redirección según carrito
+            if (cart.length > 0) router.push("/cart");
+            else router.push("/");
         } else {
-            alert("Credenciales incorrectas");
+            setError("Usuario o contraseña inválidos");
         }
     };
 
@@ -21,7 +33,7 @@ export default function LoginPage() {
         <div className="d-flex justify-content-center align-items-center">
             <div className="card p-4 shadow-lg card-login">
                 <h2 className="text-center mb-4">Iniciar sesión</h2>
-                <form>
+                <form onSubmit={onSubmit}>
                     <div className="mb-3">
                         <label className="form-label">Usuario</label>
                         <input
@@ -42,10 +54,20 @@ export default function LoginPage() {
                             className="form-control"
                         />
                     </div>
-                    <button onClick={handleLogin} className="btn btn-primary w-100">
-                        Iniciar sesión
+                    {error && <div className="alert alert-danger py-2">{error}</div>}
+                    <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                        {loading ? "Ingresando…" : "Ingresar"}
                     </button>
                 </form>
+                <p className="text-muted small mt-3 mb-0">
+                    Demo: 
+                    <ul>
+                        <li>admin / 1234</li>
+                        <li>maria / maria123</li>
+                        <li>juan / juan123</li>
+                        <li>cristian / pass2025</li>
+                    </ul>
+                </p>
             </div>
         </div>
     );

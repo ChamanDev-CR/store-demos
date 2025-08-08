@@ -47,7 +47,7 @@ export default function CartPage() {
                             </tr>
                         ))}
 
-                        <tr className="border-t">
+                        {/* <tr className="border-t">
                             <td className="p-2" colSpan={6}>
                                 <div className="flex items-center gap-2">
                                     <div>VALES</div>
@@ -67,7 +67,7 @@ export default function CartPage() {
                                     </div>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> */}
 
                         <tr className="border-t">
                             <td colSpan={5} className="p-2 text-right font-semibold">Total productos</td>
