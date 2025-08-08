@@ -9,6 +9,8 @@ export default function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  console.log('filteredProducts', filteredProducts);
+
   useEffect(() => {
     loadProducts();
   }, []);

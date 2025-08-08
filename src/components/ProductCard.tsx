@@ -6,13 +6,14 @@ import { Product } from "@/types/Product";
 
 export default function ProductCard({ product }: { product: Product }) {
     const { addToCart } = useCart();
+    const newImage = product.image.replace('.jpg', 't.png');
 
     const handleAddToCart = () => {
         addToCart({
             id: product.id,
             title: product.title,
             price: product.price,
-            image: product.image,
+            image: newImage,
             quantity: 1,
         });
     };
@@ -22,7 +23,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <div className="card h-100 p-3">
                 <div className="image-container">
                     <Image
-                        src={product.image}
+                        src={newImage}
                         alt={product.title}
                         width={300}
                         height={300}
