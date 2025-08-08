@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import Weather from "@/components/Weather";
 
 export default function Navbar() {
     const { cart } = useCart();
@@ -13,6 +14,7 @@ export default function Navbar() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div className="container-fluid">
                 <Link href="/" className="navbar-brand"><FontAwesomeIcon icon={faShoppingBag} /> GPTestStore</Link>
+                <Weather />
                 <button
                     className="navbar-toggler"
                     type="button"

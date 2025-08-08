@@ -98,7 +98,7 @@ export default function CartPage() {
                 )}
             </div>
 
-            {user && (
+            {(user && cart.length > 0) && (
                 <Checkout total={total} />
             )}
         </>
