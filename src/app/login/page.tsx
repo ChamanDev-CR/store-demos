@@ -18,25 +18,35 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-6">
-            <h2 className="text-xl font-bold mb-4">Iniciar sesión</h2>
-            <input
-                type="text"
-                placeholder="Usuario"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="border p-2 w-full mb-2"
-            />
-            <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border p-2 w-full mb-2"
-            />
-            <button onClick={handleLogin} className="bg-blue-600 text-white px-4 py-2 w-full">
-                Iniciar sesión
-            </button>
+        <div className="d-flex justify-content-center align-items-center">
+            <div className="card p-4 shadow-lg card-login">
+                <h2 className="text-center mb-4">Iniciar sesión</h2>
+                <form>
+                    <div className="mb-3">
+                        <label className="form-label">Correo Electrónico</label>
+                        <input
+                            type="text"
+                            placeholder="Usuario"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Contraseña</label>
+                        <input
+                            type="password"
+                            placeholder="Contraseña"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="form-control"
+                        />
+                    </div>
+                    <button onClick={handleLogin} className="btn btn-primary w-100">
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
