@@ -7,6 +7,16 @@ import { Product } from "@/types/Product";
 export default function ProductCard({ product }: { product: Product }) {
     const { addToCart } = useCart();
 
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1,
+        });
+    };
+
     return (
         <div className="col-12 col-md-3">
             <div className="card h-100 p-3">
@@ -24,7 +34,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     <p className="card-price fw-bold">${product.price}</p>
                     <button
                         className="btn btn-primary mt-auto"
-                        onClick={() => addToCart(product)}
+                        onClick={handleAddToCart}
                     >
                         Agregar al carrito
                     </button>
