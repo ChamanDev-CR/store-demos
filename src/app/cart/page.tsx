@@ -51,14 +51,20 @@ export default function CartPage() {
                             <td className="p-2" colSpan={6}>
                                 <div className="flex items-center gap-2">
                                     <div>VALES</div>
-                                    <input
-                                        type="text"
-                                        value={coupon}
-                                        onChange={(e) => setCoupon(e.target.value)}
-                                        placeholder="Ingrese su código"
-                                        className="border p-2 w-full max-w-xs"
-                                    />
-                                    <button className="bg-red-500 text-white px-4 py-2 rounded">OK</button>
+                                    <div className="row g-3">
+                                        <div className="col-auto">
+                                            <input
+                                                type="text"
+                                                value={coupon}
+                                                onChange={(e) => setCoupon(e.target.value)}
+                                                placeholder="Ingrese su código"
+                                                className="form-control"
+                                            />
+                                        </div>
+                                        <div className="col-auto">
+                                            <button className="btn btn-primary mb-3">OK</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

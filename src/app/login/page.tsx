@@ -23,7 +23,7 @@ export default function LoginPage() {
                 <h2 className="text-center mb-4">Iniciar sesión</h2>
                 <form>
                     <div className="mb-3">
-                        <label className="form-label">Correo Electrónico</label>
+                        <label className="form-label">Usuario</label>
                         <input
                             type="text"
                             placeholder="Usuario"
