@@ -62,3 +62,19 @@ a {
 .card-price {
   font-size: 16px;
 }
+
+.title-resumen {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid #000;
+  display: inline-block;
+}
+
+.table-products {
+  width: 100%;
+}
+.table-products td {
+
+  border: 1px solid #f1f1f1;
+}
