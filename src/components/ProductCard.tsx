@@ -8,6 +8,12 @@ export default function ProductCard({ product }: { product: Product }) {
     const { addToCart } = useCart();
     const newImage = product.image.replace('.jpg', 't.png');
 
+    const rate = Math.min(5, Math.max(0, Number(product?.rating?.rate ?? 0)));
+    const count = Number(product?.rating?.count ?? 0);
+    const rounded = Math.round(rate); // aproximación simple a estrellas enteras
+    const stars = Array.from({ length: 5 }, (_, i) => (i < rounded ? "★" : "☆")).join("");
+
+
     const handleAddToCart = () => {
         addToCart({
             id: product.id,
@@ -32,6 +38,10 @@ export default function ProductCard({ product }: { product: Product }) {
                 </div>
                 <div className="card-body d-flex flex-column">
                     <h2 className="card-title-product">{product.title}</h2>
+                    <div className="d-flex align-items-center mb-2">
+                        <span className="text-warning small" aria-label={`Calificación ${rate} de 5`}>{stars}</span>
+                        <small className="text-muted ms-2">{rate.toFixed(1)}</small>
+                    </div>
                     <p className="card-price fw-bold">${product.price}</p>
                     <button
                         className="btn btn-primary mt-auto"
