@@ -1,12 +1,15 @@
 "use client";
-import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import Checkout from "@/components/Checkout";
 
 export default function CartPage() {
     const { cart, removeFromCart } = useCart();
     const [coupon, setCoupon] = useState("");
+    const { user, logout } = useAuth();
 
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
     const shipping = cart.length > 0 ? 2500 : 0;
@@ -85,10 +88,19 @@ export default function CartPage() {
                 </table>
             </div>
 
-            <div className="mt-6 flex justify-between">
-                <Link href="/" className="bg-red-500 px-6 py-2 rounded">SEGUIR COMPRANDO</Link>
-                <Link href="/checkout" className="bg-green-600 px-6 py-2 rounded">INICIAR COMPRA</Link>
+            <div className="d-flex justify-content-between align-items-center mb-4 mt-4">
+                <Link href="/" className="btn btn-danger">SEGUIR COMPRANDO</Link>
+                {!user && (
+                    <div>
+                        <span className="ms-4">Necesita conectarse para proceder con la compra</span>
+                        <Link href="/login" className="btn btn-primary ms-2">Login</Link>
+                    </div>
+                )}
             </div>
+
+            {user && (
+                <Checkout total={total} />
+            )}
         </>
     );
 }
