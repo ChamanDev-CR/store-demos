@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { getWeatherByCity, getWeatherByCoords } from "@/lib/weather";
 
 type WData = { name: string; main: { temp: number }; weather?: { icon: string }[] };
 
@@ -10,17 +11,21 @@ export default function Weather() {
     const [error, setError] = useState<string | null>(null);
 
     const loadByCoords = async (lat: number, lon: number) => {
-        const res = await fetch(`/lib/weather?lat=${lat}&lon=${lon}`, { cache: "no-store" });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json?.message || `HTTP ${res.status}`);
-        setData(json);
+        try {
+            const { data } = await getWeatherByCoords(lat, lon);
+            setData(data);
+        } catch (error) {
+            console.error('Error cargando clima', error);
+        }
     };
 
     const loadByCity = async (city: string) => {
-        const res = await fetch(`/lib/weather?q=${encodeURIComponent(city)}`, { cache: "no-store" });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json?.message || `HTTP ${res.status}`);
-        setData(json);
+        try {
+            const { data } = await getWeatherByCity(city);
+            setData(data);
+        } catch (error) {
+            console.error('Error cargando clima', error);
+        }
     };
 
     useEffect(() => {
@@ -34,10 +39,9 @@ export default function Weather() {
                             { timeout: 7000 }
                         );
                     });
-                }
-                if (!data) {
-                    try { await loadByCity("San Jose,CR"); return; } catch { }
-                    try { await loadByCity("San José,CR"); return; } catch { }
+                } else {
+                    try { await loadByCity("San Jose,cr"); return; } catch { }
+                    try { await loadByCity("Alajuela,cr"); return; } catch { }
                     await loadByCoords(9.9281, -84.0907);
                 }
             } catch (e: any) {
