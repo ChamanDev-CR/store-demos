@@ -8,6 +8,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BootstrapClient from "@/components/BootstrapClient";
 
 // Metadatos utilizados por Next.js para toda la aplicación
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <BootstrapClient />
                 <div className="container">
                     {/* Contextos de autenticación y carrito disponibles en toda la aplicación */}
                     <AuthProvider>
