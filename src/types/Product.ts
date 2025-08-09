@@ -1,3 +1,4 @@
+// Type definition for products returned by the Fake Store API
 export interface Product {
     id: number;
     title: string;
@@ -10,3 +11,4 @@ export interface Product {
         count: number;
     };
 }
+

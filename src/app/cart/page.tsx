@@ -2,15 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+// Global cart and auth state
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+// Checkout component used once the user is authenticated
 import Checkout from "@/components/Checkout";
 
+// Displays the current shopping cart with a purchase summary
 export default function CartPage() {
     const { cart, removeFromCart } = useCart();
     const [coupon, setCoupon] = useState("");
     const { user, logout } = useAuth();
 
+    // Calculate subtotal and totals for the current items
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
     const shipping = cart.length > 0 ? 5 : 0;
     const total = subtotal + shipping;
@@ -45,6 +49,7 @@ export default function CartPage() {
                                 </td>
                                 <td className="p-2 text-center">En stock</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
+                                {/* Quantity is fixed to 1 in this simple example */}
                                 <td className="p-2 text-center">1</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
                             </tr>
@@ -98,9 +103,11 @@ export default function CartPage() {
                 )}
             </div>
 
+            {/* Show checkout form only when the user is logged in and has items */}
             {(user && cart.length > 0) && (
                 <Checkout total={total} />
             )}
         </>
     );
 }
+
