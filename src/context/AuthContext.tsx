@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-// Type representing the authenticated user, if any
+// Tipo que representa al usuario autenticado, si existe
 export type AuthUser = { id: number; username: string; name: string; email: string } | null;
 
 type AuthCtx = {
@@ -10,10 +10,10 @@ type AuthCtx = {
     logout: () => void;
 };
 
-// Create the actual context
+// Crear el contexto real
 const Ctx = createContext<AuthCtx | null>(null);
 
-// Hook to consume the auth context
+// Hook para consumir el contexto de autenticación
 export const useAuth = () => {
     const v = useContext(Ctx);
     if (!v) throw new Error("useAuth must be used within AuthProvider");
@@ -23,7 +23,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<AuthUser>(null);
 
-    // hydrate user from localStorage on first render
+    // Hidrata al usuario desde localStorage en el primer renderizado
     useEffect(() => {
         try {
             const raw = localStorage.getItem("auth:user");
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } catch { }
     }, []);
 
-    // persist user changes to localStorage
+    // Persiste los cambios del usuario en localStorage
     useEffect(() => {
         try {
             if (user) localStorage.setItem("auth:user", JSON.stringify(user));
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } catch { }
     }, [user]);
 
-    // Verify credentials against the local users.json file
+    // Verificar las credenciales contra el archivo local users.json
     const login = async (username: string, password: string) => {
         try {
             const res = await fetch("/users.json", { cache: "no-store" });

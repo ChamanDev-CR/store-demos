@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-// Access global state for cart and authentication
+// Accede al estado global para el carrito y la autenticación
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-// Optional weather indicator shown in the navbar
+// Indicador de clima opcional mostrado en la barra de navegación
 import Weather from "@/components/Weather";
 
-// Main navigation bar used across all pages
+// Barra de navegación principal utilizada en todas las páginas
 export default function Navbar() {
     const { cart } = useCart();
     const { user, logout } = useAuth();

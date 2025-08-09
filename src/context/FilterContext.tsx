@@ -1,11 +1,11 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
-// Shape of the filters used across the application
+// Forma de los filtros utilizados en toda la aplicación
 type Filters = { q: string; category: string };
 type FilterCtx = Filters & { setQ: (q: string) => void; setCategory: (c: string) => void };
 
-// React context that stores the current filters
+// Contexto de React que almacena los filtros actuales
 const Ctx = createContext<FilterCtx | null>(null);
 
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
@@ -14,7 +14,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     return <Ctx.Provider value={{ q, category, setQ, setCategory }}>{children}</Ctx.Provider>;
 };
 
-// Hook to consume the filter context
+// Hook para consumir el contexto de filtros
 export const useFilters = () => {
     const v = useContext(Ctx);
     if (!v) throw new Error("useFilters must be used within FilterProvider");

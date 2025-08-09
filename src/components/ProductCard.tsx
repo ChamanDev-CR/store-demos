@@ -1,16 +1,16 @@
 "use client";
 import Image from "next/image";
 
-// Hook to interact with the cart context
+// Hook para interactuar con el contexto del carrito
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/Product";
 
-// Card component that shows product information and a button to add it to the cart
+// Componente de tarjeta que muestra información del producto y un botón para añadirlo al carrito
 export default function ProductCard({ product }: { product: Product }) {
     const { addToCart } = useCart();
     const newImage = product.image.replace('.jpg', 't.png');
 
-    // Calculate a simple star rating from product data
+    // Calcula una calificación de estrellas sencilla a partir de los datos del producto
     const rate = Math.min(5, Math.max(0, Number(product?.rating?.rate ?? 0)));
     const count = Number(product?.rating?.count ?? 0);
     const rounded = Math.round(rate); // aproximación simple a estrellas enteras

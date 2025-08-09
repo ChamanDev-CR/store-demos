@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-// Context provider managing shopping cart state and persistence
+// Proveedor de contexto que administra el estado del carrito de compras y su persistencia
 
 // Tipo para los productos en el carrito
 interface CartItem {

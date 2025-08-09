@@ -1,4 +1,4 @@
-// Type definition for products returned by the Fake Store API
+// Definición de tipo para los productos devueltos por la API de Fake Store
 export interface Product {
     id: number;
     title: string;

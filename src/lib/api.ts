@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Axios instance for the Fake Store API used throughout the app
+// Instancia de Axios para la API Fake Store utilizada en toda la aplicación
 const api = axios.create({
   baseURL: 'https://fakestoreapi.com',
 });
