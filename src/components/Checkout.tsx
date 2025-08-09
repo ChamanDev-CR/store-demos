@@ -1,11 +1,11 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-// Context hooks to access cart contents and authenticated user
+// Hooks de contexto para acceder al contenido del carrito y al usuario autenticado
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 
-// Checkout form that simulates payment processing and empties the cart
+// Formulario de pago que simula el procesamiento y vacía el carrito
 export default function Checkout({ total }: { total: number }) {
     const { cart, removeFromCart } = useCart();
     const { user } = useAuth();
@@ -16,25 +16,25 @@ export default function Checkout({ total }: { total: number }) {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate payment processing delay
+        // Simula un retraso en el procesamiento del pago
         setTimeout(() => {
             setLoading(false);
             try {
-                // Try to open Bootstrap modal programmatically
+                // Intenta abrir un modal de Bootstrap de forma programática
                 const anyWin = window as any;
                 const modal = new anyWin.bootstrap.Modal(modalRef.current!);
                 modal.show();
             } catch {
-                // Fallback if Bootstrap is not available
+                // Alternativa en caso de que Bootstrap no esté disponible
                 alert("¡Compra realizada con éxito!");
-                // Clear cart and redirect home
+                // Limpia el carrito y redirige a la página principal
                 cart.forEach((item) => removeFromCart(item.id));
                 router.push("/");
             }
         }, 900);
     };
 
-    // When the success modal is closed, empty the cart and go back home
+    // Cuando se cierra el modal de éxito, vacía el carrito y vuelve al inicio
     useEffect(() => {
         const el = modalRef.current;
         if (!el) return;

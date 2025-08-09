@@ -1,22 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-// API helper that fetches available product categories
+// Helper de API que obtiene las categorías de productos disponibles
 import { getCategories } from "@/lib/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-// Component that renders a category selector and search box
+// Componente que renderiza un selector de categoría y un cuadro de búsqueda
 export default function ProductFilter({ onFilter }: { onFilter?: (filters: { q: string; category: string }) => void }) {
     const [categories, setCategories] = useState<string[]>([]);
     const [q, setQ] = useState("");
     const [category, setCategory] = useState("");
 
-    // Load list of categories once when component mounts
+    // Carga la lista de categorías una vez cuando el componente se monta
     useEffect(() => {
         getCategories().then(({ data }) => setCategories(data)).catch(() => setCategories([]));
     }, []);
 
-    // Notify parent component when any filter changes
+    // Notifica al componente padre cuando cualquier filtro cambia
     useEffect(() => {
         if (onFilter) {
             onFilter({ q, category });

@@ -2,19 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-// Global cart and auth state
+// Estado global del carrito y la autenticación
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-// Checkout component used once the user is authenticated
+// Componente de pago usado una vez que el usuario está autenticado
 import Checkout from "@/components/Checkout";
 
-// Displays the current shopping cart with a purchase summary
+// Muestra el carrito de compras actual con un resumen de compra
 export default function CartPage() {
     const { cart, removeFromCart } = useCart();
     const [coupon, setCoupon] = useState("");
     const { user, logout } = useAuth();
 
-    // Calculate subtotal and totals for the current items
+    // Calcula el subtotal y los totales para los artículos actuales
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
     const shipping = cart.length > 0 ? 5 : 0;
     const total = subtotal + shipping;
@@ -49,7 +49,7 @@ export default function CartPage() {
                                 </td>
                                 <td className="p-2 text-center">En stock</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
-                                {/* Quantity is fixed to 1 in this simple example */}
+                                {/* La cantidad se fija en 1 en este ejemplo sencillo */}
                                 <td className="p-2 text-center">1</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
                             </tr>
@@ -103,7 +103,7 @@ export default function CartPage() {
                 )}
             </div>
 
-            {/* Show checkout form only when the user is logged in and has items */}
+            {/* Muestra el formulario de pago solo cuando el usuario ha iniciado sesión y tiene artículos */}
             {(user && cart.length > 0) && (
                 <Checkout total={total} />
             )}

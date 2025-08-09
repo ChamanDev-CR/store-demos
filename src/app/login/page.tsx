@@ -1,23 +1,23 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-// Context providers for authentication and cart data
+// Proveedores de contexto para datos de autenticación y carrito
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 
-// Simple login page that authenticates a user from a local list
+// Página de inicio de sesión simple que autentica a un usuario de una lista local
 export default function LoginPage() {
     const { login } = useAuth();
     const { cart } = useCart();
     const router = useRouter();
 
-    // Local state for the form fields and UI helpers
+    // Estado local para los campos del formulario y ayudas de la interfaz
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Attempt to authenticate using the AuthContext login method
+    // Intento de autenticación usando el método login de AuthContext
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -25,11 +25,11 @@ export default function LoginPage() {
         const ok = await login(username, password);
         setLoading(false);
         if (ok) {
-            // Redirect user to the cart if items exist, otherwise go to home
+            // Redirige al usuario al carrito si hay artículos, de lo contrario lleva a la página principal
             if (cart.length > 0) router.push("/cart");
             else router.push("/");
         } else {
-            // Show a generic error when credentials are invalid
+            // Muestra un error genérico cuando las credenciales son inválidas
             setError("Usuario o contraseña inválidos");
         }
     };
