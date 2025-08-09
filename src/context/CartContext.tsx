@@ -1,6 +1,8 @@
 "use client";
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
+// Context provider managing shopping cart state and persistence
+
 // Tipo para los productos en el carrito
 interface CartItem {
   id: number;
@@ -86,3 +88,4 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     </CartContext.Provider>
   );
 };
+

@@ -1,9 +1,11 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+// Context hooks to access cart contents and authenticated user
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 
+// Checkout form that simulates payment processing and empties the cart
 export default function Checkout({ total }: { total: number }) {
     const { cart, removeFromCart } = useCart();
     const { user } = useAuth();
@@ -14,22 +16,25 @@ export default function Checkout({ total }: { total: number }) {
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        // Simular procesamiento de pago
+        // Simulate payment processing delay
         setTimeout(() => {
             setLoading(false);
             try {
+                // Try to open Bootstrap modal programmatically
                 const anyWin = window as any;
                 const modal = new anyWin.bootstrap.Modal(modalRef.current!);
                 modal.show();
             } catch {
+                // Fallback if Bootstrap is not available
                 alert("¡Compra realizada con éxito!");
-                // Limpiar carrito
+                // Clear cart and redirect home
                 cart.forEach((item) => removeFromCart(item.id));
                 router.push("/");
             }
         }, 900);
     };
 
+    // When the success modal is closed, empty the cart and go back home
     useEffect(() => {
         const el = modalRef.current;
         if (!el) return;
@@ -146,3 +151,4 @@ export default function Checkout({ total }: { total: number }) {
         </div>
     );
 }
+

@@ -2,14 +2,18 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+// Helpers that call the OpenWeatherMap API
 import { getWeatherByCity, getWeatherByCoords } from "@/lib/weather";
 
 type WData = { name: string; main: { temp: number }; weather?: { icon: string }[] };
 
+// Small component that tries to show the current weather using
+// the browser geolocation API or a couple of fallback cities
 export default function Weather() {
     const [data, setData] = useState<WData | null>(null);
     const [error, setError] = useState<string | null>(null);
 
+    // Request weather information by geographic coordinates
     const loadByCoords = async (lat: number, lon: number) => {
         try {
             const { data } = await getWeatherByCoords(lat, lon);
@@ -19,6 +23,7 @@ export default function Weather() {
         }
     };
 
+    // Request weather by a city name string
     const loadByCity = async (city: string) => {
         try {
             const { data } = await getWeatherByCity(city);
@@ -32,6 +37,7 @@ export default function Weather() {
         (async () => {
             try {
                 if (typeof window !== "undefined" && navigator.geolocation) {
+                    // Try to obtain user coordinates; resolve after attempt
                     await new Promise<void>((resolve) => {
                         navigator.geolocation.getCurrentPosition(
                             (pos) => { loadByCoords(pos.coords.latitude, pos.coords.longitude).finally(resolve); },
@@ -40,6 +46,7 @@ export default function Weather() {
                         );
                     });
                 } else {
+                    // Fallback to a couple of Costa Rican cities and a default coordinate
                     try { await loadByCity("San Jose,cr"); return; } catch { }
                     try { await loadByCity("Alajuela,cr"); return; } catch { }
                     await loadByCoords(9.9281, -84.0907);
