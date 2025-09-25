@@ -1,23 +1,23 @@
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-// Proveedores de contexto para datos de autenticación y carrito
+// Context providers for authentication and cart data
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 
-// Página de inicio de sesión simple que autentica a un usuario de una lista local
+// Simple login page that authenticates a user from a local list
 export default function LoginPage() {
     const { login } = useAuth();
     const { cart } = useCart();
     const router = useRouter();
 
-    // Estado local para los campos del formulario y ayudas de la interfaz
+    // Local state for form fields and UI helpers
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Intento de autenticación usando el método login de AuthContext
+    // Authentication attempt using the AuthContext login method
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -25,35 +25,35 @@ export default function LoginPage() {
         const ok = await login(username, password);
         setLoading(false);
         if (ok) {
-            // Redirige al usuario al carrito si hay artículos, de lo contrario lleva a la página principal
+            // Redirects the user to the cart if there are items, otherwise go to the homepage
             if (cart.length > 0) router.push("/cart");
             else router.push("/");
         } else {
-            // Muestra un error genérico cuando las credenciales son inválidas
-            setError("Usuario o contraseña inválidos");
+            // Show a generic error when credentials are invalid
+            setError("Invalid username or password");
         }
     };
 
     return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="card p-4 shadow-lg card-login">
-                <h2 className="text-center mb-4">Iniciar sesión</h2>
+                <h2 className="text-center mb-4">Sign in</h2>
                 <form onSubmit={onSubmit}>
                     <div className="mb-3">
-                        <label className="form-label">Usuario</label>
+                        <label className="form-label">Username</label>
                         <input
                             type="text"
-                            placeholder="Usuario"
+                            placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             className="form-control"
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label">Contraseña</label>
+                        <label className="form-label">Password</label>
                         <input
                             type="password"
-                            placeholder="Contraseña"
+                            placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="form-control"
@@ -61,7 +61,7 @@ export default function LoginPage() {
                     </div>
                     {error && <div className="alert alert-danger py-2">{error}</div>}
                     <button type="submit" className="btn btn-primary w-100" disabled={loading}>
-                        {loading ? "Ingresando…" : "Ingresar"}
+                        {loading ? "Signing in…" : "Sign in"}
                     </button>
                 </form>
                 <div className="text-muted small mt-3 mb-0">

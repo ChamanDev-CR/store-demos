@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-// Estilos globales para Bootstrap y CSS personalizado
+// Global styles for Bootstrap and custom CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 
-// Proveedores globales y componentes de layout
+// Global providers and layout components
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BootstrapClient from "@/components/BootstrapClient";
 
-// Metadatos utilizados por Next.js para toda la aplicación
+// Metadata leveraged by Next.js for the entire app
 export const metadata: Metadata = {
     title: "Grupo Pampa TEST B2C",
-    description: "Tienda Online Test",
+    description: "Online Store Test",
 };
 
-// RootLayout envuelve cada página con proveedores y componentes compartidos
+// RootLayout wraps every page with shared providers and components
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -27,7 +27,7 @@ export default function RootLayout({
             <body>
                 <BootstrapClient />
                 <div className="container">
-                    {/* Contextos de autenticación y carrito disponibles en toda la aplicación */}
+                    {/* Authentication and cart contexts available throughout the app */}
                     <AuthProvider>
                         <CartProvider>
                             <Navbar />

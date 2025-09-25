@@ -1,9 +1,9 @@
 "use client";
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-// Proveedor de contexto que administra el estado del carrito de compras y su persistencia
+// Context provider that manages the shopping cart state and its persistence
 
-// Tipo para los productos en el carrito
+// Type for products in the cart
 interface CartItem {
   id: number;
   title: string;
@@ -19,7 +19,7 @@ interface CartContextType {
   updateQuantity: (id: number, quantity: number) => void;
 }
 
-// Inicializa contexto vacío
+// Initialize an empty context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
@@ -29,10 +29,10 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  // Estado del carrito, que se sincroniza con localStorage
+  // Cart state synchronized with localStorage
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  // Efecto para cargar carrito desde localStorage
+  // Effect to load the cart from localStorage
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -40,7 +40,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Efecto para guardar el carrito en localStorage
+  // Effect to save the cart into localStorage
   useEffect(() => {
     if (cart.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -49,28 +49,28 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cart]);
 
-  // Función para agregar un producto al carrito
+  // Function to add a product to the cart
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
-      // Verifica si el producto ya está en el carrito
+      // Check if the product is already in the cart
       const productIndex = prev.findIndex((product) => product.id === item.id);
       if (productIndex !== -1) {
-        // Si ya existe, aumenta la cantidad
+        // If it exists, increase the quantity
         const updatedCart = [...prev];
         updatedCart[productIndex].quantity += item.quantity;
         return updatedCart;
       }
-      // Si no existe, lo agrega
+      // If it does not exist, add it
       return [...prev, item];
     });
   };
 
-  // Función para eliminar un producto del carrito
+  // Function to remove a product from the cart
   const removeFromCart = (id: number) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Función para actualizar la cantidad de un producto
+  // Function to update the quantity of a product
   const updateQuantity = (id: number, quantity: number) => {
     setCart((prev) => {
       const updatedCart = [...prev];

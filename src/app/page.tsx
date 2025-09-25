@@ -1,25 +1,25 @@
 "use client";
 import { useEffect, useState } from "react";
-// Helpers de API para solicitar productos y categorías
+// API helpers for requesting products and categories
 import { getProducts, getProductsByCategory } from "@/lib/api";
-// Componentes de interfaz de usuario
+// UI components
 import ProductCard from "@/components/ProductCard";
 import ProductFilter from "@/components/ProductFilter";
 
-// Página de inicio que lista productos y permite un filtrado simple
+// Home page that lists products and enables basic filtering
 export default function HomePage() {
-  // Lista completa de productos cargados desde la API
+  // Full product list loaded from the API
   const [products, setProducts] = useState<any[]>([]);
-  // Productos después de aplicar filtros de búsqueda/categoría
+  // Products after applying search/category filters
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
-  // Estado de carga utilizado al solicitar productos
+  // Loading state used when requesting products
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadProducts();
   }, []);
 
-  // Obtener todos los productos de la API falsa y poblar el estado local
+  // Retrieve all products from the Fake Store API and populate local state
   const loadProducts = async () => {
     setLoading(true);
     const { data } = await getProducts();
@@ -28,19 +28,19 @@ export default function HomePage() {
     setLoading(false);
   };
 
-  // Callback que se ejecuta cuando el formulario de ProductFilter cambia
-  // Opcionalmente consulta productos por categoría y luego filtra por nombre
+  // Callback executed when the ProductFilter form changes
+  // Optionally queries products by category and then filters by name
   const handleFilter = async ({ q, category }: { q: string; category: string }) => {
     let data = [];
     if (category) {
-      // Solicita productos para una categoría específica
+      // Request products for a specific category
       const res = await getProductsByCategory(category);
       data = res.data;
     } else {
       data = products;
     }
     if (q) {
-      // Filtra localmente por el título del producto
+      // Filter locally by the product title
       data = data.filter((p: any) => p.title.toLowerCase().includes(q.toLowerCase()));
     }
     setFilteredProducts(data);
@@ -49,10 +49,10 @@ export default function HomePage() {
   return (
     <>
       <ProductFilter onFilter={handleFilter} />
-      <h1 className="title-products">PRODUCTOS DE TEMPORADA</h1>
+      <h1 className="title-products">SEASONAL PRODUCTS</h1>
       <div className="row gx-4 gy-4">
         {loading ? (
-          <p className="text-center my-5">Cargando productos...</p>
+          <p className="text-center my-5">Loading products...</p>
         ) : (
           <>
             {filteredProducts.map((product) => (

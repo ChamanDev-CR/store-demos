@@ -1,50 +1,42 @@
 # GP Store App
 
-Aplicación web desarrollada en **Next.js** y **Bootstrap** que simula una tienda en línea orientada al consumidor final (B2C).  
-Integra la API pública [FakeStoreAPI](https://fakestoreapi.com/) y [OpenWeatherMap](https://openweathermap.org/) para enriquecer la experiencia del usuario.
+Web application built with **Next.js** and **Bootstrap** that simulates a consumer-facing (B2C) online store.  
+It integrates the public [FakeStoreAPI](https://fakestoreapi.com/) and [OpenWeatherMap](https://openweathermap.org/) APIs to enhance the user experience.
 
----
-
-## Repositorio en GitHub
-El código fuente del proyecto se encuentra disponible en:  
-[https://github.com/yasusnake/gp-store-test](https://github.com/yasusnake/gp-store-test)
-
----
-
-## Prueba Desplegada en Heroku
-Se ha desplegado una versión de prueba accesible en:  
+## Demo Deployed on Heroku
+A test deployment is accessible at:  
 [https://gpstoreapptest-304d928da718.herokuapp.com](https://gpstoreapptest-304d928da718.herokuapp.com)
 
 ---
 
-## Requerimientos Previos
+## Prerequisites
 
-Antes de ejecutar el proyecto localmente, se debe contar con:
+Before running the project locally, ensure that you have:
 
 - [Node.js 18+](https://nodejs.org/)  
 - [npm](https://www.npmjs.com/)
-- Git (opcional, para clonar el repositorio)  
+- Git (optional, to clone the repository)  
 
 ---
 
-## Instrucciones para Ejecutar Localmente
+## Local Development
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
     ```bash
     git clone https://github.com/yasusnake/gp-store-test.git
     cd gp-store-test
     ```
-2. **Instalar dependencias**
+2. **Install dependencies**
     ```bash
     npm install
     ```
 
-3. **Ejecutar en modo desarrollo**
+3. **Start the development server**
     ```bash
     npm run dev
     ```
 
-4. **Abrir en el navegador**
+4. **Open in the browser**
     ```bash
     http://localhost:3000
     ```

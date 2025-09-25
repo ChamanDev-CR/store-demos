@@ -1,6 +1,6 @@
 [
   { "id": 1, "username": "admin",   "name": "Admin",   "email": "admin@example.com",   "password": "1234" },
-  { "id": 2, "username": "maria",   "name": "María Gómez", "email": "maria@example.com",   "password": "maria123" },
-  { "id": 3, "username": "juan",    "name": "Juan Pérez",  "email": "juan@example.com",    "password": "juan123" },
+  { "id": 2, "username": "maria",   "name": "Maria Gomez", "email": "maria@example.com",   "password": "maria123" },
+  { "id": 3, "username": "juan",    "name": "Juan Perez",  "email": "juan@example.com",    "password": "juan123" },
   { "id": 4, "username": "cristian","name": "Cristian M.", "email": "cristian@example.com","password": "pass2025" }
 ]

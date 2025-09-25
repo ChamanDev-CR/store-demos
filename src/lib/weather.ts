@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-// Instancia base de Axios configurada para la API de OpenWeatherMap
+// Base Axios instance configured for the OpenWeatherMap API
 const API_KEY = "39d83a41f7e6d68963e5ce716479871f";
 
 const weatherApi = axios.create({
     baseURL: 'https://api.openweathermap.org/data/2.5',
 });
 
-// Solicita el clima actual por nombre de ciudad
+// Request current weather by city name
 export const getWeatherByCity = (city: string) =>
     weatherApi.get('/weather', {
         params: {
@@ -16,7 +16,7 @@ export const getWeatherByCity = (city: string) =>
         },
     });
 
-// Solicita el clima actual por coordenadas geográficas
+// Request current weather by geographic coordinates
 export const getWeatherByCoords = (lat: number, lon: number) =>
     weatherApi.get('/weather', {
         params: {

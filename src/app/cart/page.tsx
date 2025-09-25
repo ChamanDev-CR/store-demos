@@ -2,37 +2,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-// Estado global del carrito y la autenticación
+// Global state for the cart and authentication
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-// Componente de pago usado una vez que el usuario está autenticado
+// Checkout component used once the user is authenticated
 import Checkout from "@/components/Checkout";
 
-// Muestra el carrito de compras actual con un resumen de compra
+// Displays the current shopping cart with an order summary
 export default function CartPage() {
     const { cart, removeFromCart } = useCart();
     const [coupon, setCoupon] = useState("");
     const { user, logout } = useAuth();
 
-    // Calcula el subtotal y los totales para los artículos actuales
+    // Calculate the subtotal and totals for the current items
     const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
     const shipping = cart.length > 0 ? 5 : 0;
     const total = subtotal + shipping;
 
     return (
         <>
-            <h1 className="title-resumen">RESUMEN DEL CARRITO DE COMPRAS</h1>
-            <p className="mb-4">Su carrito contiene: {cart.length} producto(s)</p>
+            <h1 className="title-resumen">SHOPPING CART SUMMARY</h1>
+            <p className="mb-4">Your cart contains: {cart.length} product(s)</p>
 
             <div className="overflow-x-auto">
                 <table className="border table-products">
                     <thead className="bg-gray-100 text-left">
                         <tr>
-                            <th className="p-2">Producto</th>
-                            <th className="p-2">Descripción</th>
-                            <th className="p-2 text-center">Disponibilidad</th>
-                            <th className="p-2 text-center">Precio unitario</th>
-                            <th className="p-2 text-center">Cantidad</th>
+                            <th className="p-2">Product</th>
+                            <th className="p-2">Description</th>
+                            <th className="p-2 text-center">Availability</th>
+                            <th className="p-2 text-center">Unit price</th>
+                            <th className="p-2 text-center">Quantity</th>
                             <th className="p-2 text-center">Total</th>
                         </tr>
                     </thead>
@@ -45,11 +45,11 @@ export default function CartPage() {
                                 <td className="p-2">
                                     <strong>{item.title}</strong>
                                     <p className="text-gray-500 text-xs">SKU: PROD-{item.id}</p>
-                                    <p className="text-gray-500 text-xs">Marca: Genérica</p>
+                                    <p className="text-gray-500 text-xs">Brand: Generic</p>
                                 </td>
-                                <td className="p-2 text-center">En stock</td>
+                                <td className="p-2 text-center">In stock</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
-                                {/* La cantidad se fija en 1 en este ejemplo sencillo */}
+                                {/* Quantity is fixed at 1 in this simple example */}
                                 <td className="p-2 text-center">1</td>
                                 <td className="p-2 text-center">$ {item.price.toLocaleString()}</td>
                             </tr>
@@ -65,7 +65,7 @@ export default function CartPage() {
                                                 type="text"
                                                 value={coupon}
                                                 onChange={(e) => setCoupon(e.target.value)}
-                                                placeholder="Ingrese su código"
+                                                placeholder="Enter your code"
                                                 className="form-control"
                                             />
                                         </div>
@@ -78,11 +78,11 @@ export default function CartPage() {
                         </tr> */}
 
                         <tr className="border-t">
-                            <td colSpan={5} className="p-2 text-right font-semibold">Total productos</td>
+                            <td colSpan={5} className="p-2 text-right font-semibold">Products subtotal</td>
                             <td className="p-2 text-right">$ {subtotal.toLocaleString()}</td>
                         </tr>
                         <tr>
-                            <td colSpan={5} className="p-2 text-right font-semibold">Envío total</td>
+                            <td colSpan={5} className="p-2 text-right font-semibold">Shipping</td>
                             <td className="p-2 text-right">$ {shipping.toLocaleString()}</td>
                         </tr>
                         <tr className="border-t text-lg font-bold">
@@ -94,16 +94,16 @@ export default function CartPage() {
             </div>
 
             <div className="d-flex justify-content-between align-items-center mb-4 mt-4">
-                <Link href="/" className="btn btn-danger">SEGUIR COMPRANDO</Link>
+                <Link href="/" className="btn btn-danger">CONTINUE SHOPPING</Link>
                 {!user && (
                     <div>
-                        <span className="ms-4">Necesita conectarse para proceder con la compra</span>
+                        <span className="ms-4">You need to sign in to proceed with the purchase</span>
                         <Link href="/login" className="btn btn-primary ms-2">Login</Link>
                     </div>
                 )}
             </div>
 
-            {/* Muestra el formulario de pago solo cuando el usuario ha iniciado sesión y tiene artículos */}
+            {/* Show the checkout form only when the user is logged in and has items */}
             {(user && cart.length > 0) && (
                 <Checkout total={total} />
             )}

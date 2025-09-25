@@ -1,9 +1,9 @@
-// Pie de página simple mostrado al final de cada página
+// Simple footer displayed at the end of each page
 export default function Footer() {
   return (
     <footer className="bg-dark text-light text-center py-4 mt-4">
       <div className="container">
-        <p className="mb-0">&copy; {new Date().getFullYear()} GPTestStore. Sitio de simulacion de una store para Grupo Pampa.</p>
+        <p className="mb-0">&copy; {new Date().getFullYear()} GPTestStore. Store simulation site for Grupo Pampa.</p>
       </div>
     </footer>
   );

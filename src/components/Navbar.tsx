@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-// Accede al estado global para el carrito y la autenticación
+// Access global state for the cart and authentication
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-// Indicador de clima opcional mostrado en la barra de navegación
+// Optional weather indicator displayed in the navigation bar
 import Weather from "@/components/Weather";
 
-// Barra de navegación principal utilizada en todas las páginas
+// Main navigation bar used on every page
 export default function Navbar() {
     const { cart } = useCart();
     const { user, logout } = useAuth();
@@ -33,12 +33,12 @@ export default function Navbar() {
                     <ul className="navbar-nav ms-auto">
                         {user && (
                             <li className="nav-item">
-                                <span className="nav-link">Hola, {user.name}</span>
+                                <span className="nav-link">Hello, {user.name}</span>
                             </li>
                         )}
                         <li className="nav-item">
                             <Link href="/cart" className="nav-link">
-                                <FontAwesomeIcon icon={faShoppingCart} /> Carrito ({cart.length})
+                                <FontAwesomeIcon icon={faShoppingCart} /> Cart ({cart.length})
                             </Link>
                         </li>
                         {user ? (

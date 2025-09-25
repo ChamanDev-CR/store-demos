@@ -1,22 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-// Helper de API que obtiene las categorías de productos disponibles
+// API helper that fetches available product categories
 import { getCategories } from "@/lib/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-// Componente que renderiza un selector de categoría y un cuadro de búsqueda
+// Component that renders a category selector and a search box
 export default function ProductFilter({ onFilter }: { onFilter?: (filters: { q: string; category: string }) => void }) {
     const [categories, setCategories] = useState<string[]>([]);
     const [q, setQ] = useState("");
     const [category, setCategory] = useState("");
 
-    // Carga la lista de categorías una vez cuando el componente se monta
+    // Load the category list once when the component mounts
     useEffect(() => {
         getCategories().then(({ data }) => setCategories(data)).catch(() => setCategories([]));
     }, []);
 
-    // Notifica al componente padre cuando cualquier filtro cambia
+    // Notify the parent component whenever any filter changes
     useEffect(() => {
         if (onFilter) {
             onFilter({ q, category });
@@ -29,12 +29,12 @@ export default function ProductFilter({ onFilter }: { onFilter?: (filters: { q: 
                 <div className="p-4">
                     <p><b><FontAwesomeIcon icon={faPhone} /> 8540-6440 - 8485-5114</b></p>
                     <p><FontAwesomeIcon icon={faEnvelope} /> cristianmb13@gmail.com</p>
-                    <p>Este es una prueba de desarrollo</p>
+                    <p>This is a development test</p>
                 </div>
             </div>
             <div className="col-12 col-md-8 box-filter">
                 <div className="p-4">
-                    <label>BUSCAR EN TODOS LOS PRODUCTOS</label>
+                    <label>SEARCH ALL PRODUCTS</label>
                     <form className="row g-0">
                         <div className="col-12 col-md-4">
                             <select
@@ -42,7 +42,7 @@ export default function ProductFilter({ onFilter }: { onFilter?: (filters: { q: 
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             >
-                                <option value="">Todas las categorías</option>
+                                <option value="">All categories</option>
                                 {categories.map((c) => (
                                     <option key={c} value={c}>{c}</option>
                                 ))}
@@ -52,7 +52,7 @@ export default function ProductFilter({ onFilter }: { onFilter?: (filters: { q: 
                             <input
                                 className="form-control"
                                 type="search"
-                                placeholder="Buscar por nombre"
+                                placeholder="Search by name"
                                 value={q}
                                 onChange={(e) => setQ(e.target.value)}
                             />
