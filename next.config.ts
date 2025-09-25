@@ -2,9 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['fakestoreapi.com', 'dummyjson.com', 'openweathermap.org'],
+    domains: ['fakestoreapi.com'],
   },
-  output: "standalone",
 };
 
 export default nextConfig;
